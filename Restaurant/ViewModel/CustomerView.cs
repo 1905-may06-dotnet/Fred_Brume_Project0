@@ -173,10 +173,16 @@ namespace PizzaBox.Client.ViewModel
 
                     Console.WriteLine("Choose from the Toppings on the List:");
                     List<Toppings> toppings = ToppingsHandler.GetToppings(pizza);
-                    List<Toppings> defaultToppings = ToppingsHandler.GetDefaultToppings(pizza);
+
+              
 
                     ToppingView.DisplayToppings(toppings);
-                    ToppingView.DisplayDefaultToppings(toppings);
+                    Console.WriteLine();
+
+
+                    List<Toppings> defaultToppings = ToppingsHandler.GetDefaultToppings(pizza);
+                    ToppingView.DisplayDefaultToppings(defaultToppings);
+                    Console.WriteLine();
 
 
                     //Check for Toppings Count
@@ -203,9 +209,10 @@ namespace PizzaBox.Client.ViewModel
 
                         } while (index == -1);
 
-                        chosenToppings.Add(toppings[index]);
+                        chosenToppings.Add(toppings[index - 1]);
                     }
 
+                   
                     //Re assign chosen topping when the default toppings has been added
                     chosenToppings = ToppingsHandler.AddDefaultToChosenToppings(chosenToppings, defaultToppings);
 
@@ -215,13 +222,21 @@ namespace PizzaBox.Client.ViewModel
                     double toppingsCost = ToppingsHandler.TotalToppingsCost(chosenToppings);
                     ToppingView.DisplayToppingsTotalCost(toppingsCost);
 
+                    
+
+                    //problem is in the PizzaHandler class
                     Pizza pizzaOrder = PizzaHandler.GetPizzaPrice(pizza.PType, pizzaSize, pizzaCrust);
+
+                    Console.WriteLine("Pizza Order: " + pizzaOrder);
+
+                    //
+
+                    
 
                     currentCost = OrderHandler.GetOrderCost(Convert.ToDouble(pizzaOrder.PPrice), toppingsCost);
                     OrderView.DisplayOrderCost(currentCost);
 
                     totalCost += currentCost;
-
 
                     orders.Add(new Porder
                     {
@@ -259,7 +274,14 @@ namespace PizzaBox.Client.ViewModel
                     {
                         Console.WriteLine(" Yay!  Your Order has been placed  ");
                         Console.WriteLine("Thank you for choosing PizaBox");
+
+                        Environment.Exit(0);
+                    }else
+                    {
+                        Console.WriteLine(" Something went wrong with your order: Pls try re-ordering ");
+                        displayView(user);
                     }
+
 
                 }else if (orderOption.ToLower().Equals("no"))
                 {

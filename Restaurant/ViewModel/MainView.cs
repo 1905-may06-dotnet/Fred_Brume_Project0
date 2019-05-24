@@ -29,7 +29,8 @@ namespace PizzaBox.Client.ViewModel
         internal static void DisplayUserDetails(Puser user)
         {
             isEmployee = UserHandler.CheckIfEmployee(user);
-            string userType = isEmployee ? "Customer" : "Employee";
+
+            string userType = !isEmployee ? "Customer" : "Employee";
 
             Console.WriteLine();
             Console.WriteLine($" First Name: {user.Firstname}");

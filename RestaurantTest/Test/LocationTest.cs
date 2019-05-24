@@ -21,7 +21,7 @@ namespace PizzaBox.Testing.Test
 
             var location = locations.Where(l => l.LocationId == 1).First();
 
-            Assert.AreEqual("Brokyln", location.City);
+            Assert.AreEqual("Brookyln", location.City);
 
         }
 

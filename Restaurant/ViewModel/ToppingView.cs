@@ -23,12 +23,13 @@ namespace PizzaBox.Client.ViewModel
         internal static void DisplayDefaultToppings(List<Toppings> toppings)
         {
             Console.WriteLine(" DEFAULT TOPPINGS: ");
-            Console.WriteLine("-----------------------------------------");
 
             for (int i = 0; i <= toppings.Count - 1; i++)
             {
-                Console.Write($" [ {toppings[i].TName} ]     ");
+                Console.Write($" [ {toppings[i].TName} ]  ");
             }
+
+            Console.WriteLine();
         }
 
         internal static void DisplayToppingsTotalCost(double cost)

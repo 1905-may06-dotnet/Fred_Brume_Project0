@@ -56,16 +56,22 @@ namespace PizzaBox.Data.Model
             return GetPizzas().Where<Pizza>(r => r.PizzaId == pizza_Id).FirstOrDefault();
         }
 
-        public List<Pizza> GetPizzas()
+        public List<Pizza> GetDistinctPizzas()
         {
             return DBinstance.Instance.Pizza.GroupBy(a => a.PType)
                    .Select(g => g.First())
                    .ToList();
         }
 
+        public List<Pizza> GetPizzas()
+        {
+            return DBinstance.Instance.Pizza.ToList();
+        }
+
         public List<Pizza> GetPizzasFromLocation(Plocation location)
         {
-            return GetPizzas().Where<Pizza>(r => r.SLocationId == location.LocationId).ToList();   
+            //if it is distinct by name, you can get an exception. This logic is not feasible
+            return GetDistinctPizzas().Where<Pizza>(r => r.SLocationId == location.LocationId).ToList();   
         }
 
 
@@ -77,7 +83,19 @@ namespace PizzaBox.Data.Model
 
         public List<Toppings> GetToppings(Pizza pizza)
         {
-            return GetToppings().Where<Toppings>(p => p.PizzaId == pizza.PizzaId).ToList();
+            List<Toppings> toppings = null;
+            try
+            {
+              toppings = GetToppings().Where<Toppings>(p => p.PizzaId == pizza.PizzaId).ToList();
+
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Could not get data from the database");
+            }
+
+            return toppings;
+            
         }
 
 

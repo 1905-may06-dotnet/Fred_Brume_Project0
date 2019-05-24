@@ -13,6 +13,7 @@ namespace PizzaBox.Data
         int AddLocation(Plocation location);
         void voidDeleteLocation(Plocation location);
 
+        List<Pizza> GetDistinctPizzas();
         List<Pizza> GetPizzas();
         Pizza GetPizza(int pizza_Id);
         List<Pizza> GetPizzasFromLocation(Plocation location);

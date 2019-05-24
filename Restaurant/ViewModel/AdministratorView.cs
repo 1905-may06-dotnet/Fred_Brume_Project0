@@ -127,6 +127,8 @@ namespace PizzaBox.Client.ViewModel
 
             } while (option1.ToLower().Equals("yes") || option1.ToLower().Equals("no"));
 
+            Console.WriteLine();
+
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿
+
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using PizzaBox.Data.Model;
 
@@ -10,7 +10,7 @@ namespace PizzaBox.Domain.Model
     {
 
         public static string[] pizzaSize = { "small", "medium", "large" };
-        public static string[] pizzaCrust = { "Thin", "Sour Dough", "Sicilian", "St Loius", "Tomatoe Pie", "Beer battered" };
+        public static string[] pizzaCrust = { "thin", "Sour dough" };
 
         public static List<Pizza> GetPizzas()
         {
@@ -38,18 +38,21 @@ namespace PizzaBox.Domain.Model
         public static Pizza GetPizzaPrice(string pizzaType, string size, string crust)
         {
             List<Pizza> pizzas = new Crud().GetPizzas();
+            Pizza piz = new Pizza();
+
+            Console.WriteLine();
 
             foreach (Pizza pizza in pizzas)
             {
-
+                //break the condition down
                 if (pizza.PType.ToLower().Equals(pizzaType.ToLower()) 
                     && pizza.PSize.ToLower().Equals(size.ToLower()) && pizza.Crust.ToLower().Equals(crust.ToLower())){
 
-                    return pizza;
+                    piz = pizza;
                 }
             }
 
-            return null;
+            return piz;
         }
 
 

@@ -10,6 +10,9 @@ namespace PizzaBox.Domain.Handler
 
         public static List<Toppings> GetToppings(Pizza pizza)
         {
+
+            List<Toppings> toppings = new Crud().GetToppings(pizza);
+
             return new Crud().GetToppings(pizza);
         }
 
@@ -17,10 +20,12 @@ namespace PizzaBox.Domain.Handler
         {
            List<Toppings> toppings = new Crud().GetToppings(pizza);
            List<Toppings> defaultToppings = new List<Toppings>();
+
+   
             foreach (Toppings topping in toppings)
            {
-                if (topping.T_Type.ToLower().Equals("default")){
-
+                if (topping.T_Type.ToLower().Trim().Equals("default"))
+                {
                     defaultToppings.Add(topping);
                 }
            }

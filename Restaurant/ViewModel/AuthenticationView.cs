@@ -69,7 +69,7 @@ namespace PizzaBox.Client.ViewModel
 
             user1 = user;
 
-            return (user != null)? true : false;
+            return (user != null) ? true : false;
         }
 
     }
